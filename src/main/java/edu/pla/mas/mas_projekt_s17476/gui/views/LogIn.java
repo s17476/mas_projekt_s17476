@@ -20,7 +20,7 @@ public class LogIn extends JFrame {
 	
 	private JTextField userField;
 	private JPasswordField passwordField;
-	JButton btnNewButton = new JButton("LOG IN");
+	private JButton btnNewButton = new JButton("LOG IN");
 
 
 	public LogIn(String name) {
@@ -58,7 +58,6 @@ public class LogIn extends JFrame {
 
 	}
 	
-
 
 	public JButton getLogInButton() {
 		return btnNewButton;

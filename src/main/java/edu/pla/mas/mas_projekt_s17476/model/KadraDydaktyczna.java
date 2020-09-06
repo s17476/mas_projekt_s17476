@@ -14,7 +14,7 @@ import com.sun.istack.Nullable;
  */
 
 @Entity
-public class KadraDydaktyczna {///////////////////////////////////dodać grupy
+public class KadraDydaktyczna {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

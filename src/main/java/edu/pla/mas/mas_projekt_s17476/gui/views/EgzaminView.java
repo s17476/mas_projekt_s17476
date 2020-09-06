@@ -30,15 +30,14 @@ import net.miginfocom.swing.MigLayout;
  */
 
 public class EgzaminView extends JFrame {
-	private JFrame parent;
 	private JPanel contentPane;
 	private Egzamin egzamin;
-	public PytanieEgzaminacyjne pe;
-	public Osoba osoba;
-	JLabel titleLabel = new JLabel("");
-	JLabel timerLabel = new JLabel("00:00");
-	JButton endExam = new JButton("ZAKOŃCZ EGZAMIN");
-	Map<PytanieEgzaminacyjne, Map<String, JCheckBox>> test = new HashMap<>();
+	private PytanieEgzaminacyjne pe;
+	private Osoba osoba;
+	private JLabel titleLabel = new JLabel("");
+	private JLabel timerLabel = new JLabel("00:00");
+	private JButton endExam = new JButton("ZAKOŃCZ EGZAMIN");
+	private Map<PytanieEgzaminacyjne, Map<String, JCheckBox>> test = new HashMap<>();
 
 	/**
 	 * Create the frame.
@@ -55,14 +54,12 @@ public class EgzaminView extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new MigLayout("", "[][grow][grow][]", "[][][grow][]"));
 		
-		
 		titleLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		contentPane.add(titleLabel, "cell 0 0");
 			
 		JLabel lblNewLabel_2 = new JLabel("Czas pozostały do końca egzaminu:");
 		contentPane.add(lblNewLabel_2, "flowx,cell 2 1,alignx right");
 			
-		
 		contentPane.add(timerLabel, "cell 2 1,alignx right");
 			
 		JScrollPane scrollPane = new JScrollPane();
@@ -73,10 +70,6 @@ public class EgzaminView extends JFrame {
 		scrollPane.setViewportView(panel);
 		panel.setLayout(new MigLayout("", "[grow]", "[][][][][][][][][][]"));
 			
-		
-			
-		
-		
 		/**
 		 * dodaje pytania  i odpowiedzi do paneli
 		 */
@@ -144,11 +137,6 @@ public class EgzaminView extends JFrame {
 		}
 		
 		
-		
-
-		
-
-		
 		/**
 		 * blokuje okno
 		 */
@@ -195,6 +183,5 @@ public class EgzaminView extends JFrame {
 		this.test = test;
 	}
 
-	
 	
 }

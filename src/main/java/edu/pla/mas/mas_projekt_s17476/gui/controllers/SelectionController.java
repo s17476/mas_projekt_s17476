@@ -49,25 +49,18 @@ public class SelectionController {
 	private PrzedmiotGrupa przedmiotGrupa;
 	private List<PytanieEgzaminacyjne> pytania;
 	
-	
-	
+
 	public SelectionController() {
 		view = new Selection("Wybór pytań");
 		addListeners();
 	}
-
-
 
 	public void showGui(PrzedmiotGrupa przedmiotGrupa, MainWindow mainWindow) {
 		this.przedmiotGrupa = przedmiotGrupa;
 		this.mainWindow = mainWindow;
 		this.mainWindow.setEnabled(false);
 		view.setVisible(true);
-		
-	
 		initData();
-		
-		System.out.println(przedmiotGrupa.getGrupa() + "    " + przedmiotGrupa.getPrzedmiot() + "  " + przedmiotGrupa.getDydaktyk());
 	}
 
 
@@ -77,16 +70,13 @@ public class SelectionController {
 		lista.removeAllElements();
 		DefaultListModel<PytanieEgzaminacyjne> lista1 = view.getList1Model();
 		lista1.removeAllElements();
-		//System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxx" + peRepo.findAllEagerly());
 		
 		peRepo.findAllEagerly()
 			.forEach(x -> {
-//				System.out.println("jeden " + x.getPrzedmiot().getId());
-//				System.out.println("drugi " + przedmiotGrupa.getPrzedmiot().getId());
+
 				if(x.getPrzedmiot().getId() == przedmiotGrupa.getPrzedmiot().getId()) {
 					if(!lista.contains(x))
 						lista.addElement(x);
-//					System.out.println("dodano");
 				}
 			});
 		view.getPrzedmiotLabel().setText("Pytania z przedmiotu: " + przedmiotGrupa.getPrzedmiot());
@@ -101,6 +91,8 @@ public class SelectionController {
 		public void actionPerformed(ActionEvent e) {
 		try {
 				Set<PytanieEgzaminacyjne> pe = new HashSet<>();
+				if(view.getList1Model().getSize()<1 || view.getList1Model().getSize()>10)
+					throw new Exception();
 				for(int i = 0; i < view.getList1Model().getSize(); i++) {
 					pe.add(view.getList1Model().get(i));
 				}
@@ -114,7 +106,6 @@ public class SelectionController {
 				JOptionPane.showMessageDialog(view, "Egzamin zapisany!");
 				view.dispatchEvent(new WindowEvent(view, WindowEvent.WINDOW_CLOSING));
 			}catch(Exception exc) {
-				exc.printStackTrace();
 				JOptionPane.showMessageDialog(view, "Sprawdź wprowadzone dane!");
 			}
 			}

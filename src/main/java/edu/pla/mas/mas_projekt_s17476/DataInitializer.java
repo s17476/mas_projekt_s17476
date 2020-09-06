@@ -5,13 +5,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-
 import edu.pla.mas.mas_projekt_s17476.model.Adres;
 import edu.pla.mas.mas_projekt_s17476.model.Egzamin;
 import edu.pla.mas.mas_projekt_s17476.model.Grupa;
@@ -203,12 +198,6 @@ public class DataInitializer {
 			//dostępne przedmioty
 			List<Przedmiot> przedmioty = (List<Przedmiot>) pRepo.findAllEagerly();
 			
-			//pobieram nauczycieli z bazy
-//			List<Osoba> os = ((List<Osoba>) oRepo.findAll())
-//														.stream()
-//														.filter(x -> Objects.nonNull(x.getKadraDydaktyczna()))
-//														.collect(Collectors.toList()
-//																);
 			
 			List<KadraDydaktyczna> nauczyciele = kaRepo.findAllEagerly();
 			
@@ -216,7 +205,6 @@ public class DataInitializer {
 			
 			System.out.println("Grupy" + grupy);
 			
-//			System.out.println(" NAUCZYCIELE             " + nauczyciele);
 			
 			List<PrzedmiotGrupa> pg = List.of(
 					new PrzedmiotGrupa(przedmioty.get(0), grupy.get(0), nauczyciele.get(0)),
@@ -235,8 +223,6 @@ public class DataInitializer {
 			gRepo.saveAll(grupy);
 			
 			
-
-
 			/*
 			 * dodaję opiekunów dla uczniów
 			 */
@@ -254,7 +240,6 @@ public class DataInitializer {
 			uRepo.save(u2);
 			
 			o1 = oRepo.findByPeselAndFetchPodopieczniEagerly(list.get(17).getPesel()).get();
-//			System.out.println("Podopieczni:          " + o1.getPodopieczni());
 			
 			/*
 			 * dodaję przykładowe pytania
@@ -301,8 +286,6 @@ public class DataInitializer {
 					pytaniaSet
 					);
 			
-//			System.out.println("EGZAMIN              " + egzamin);
-			
 			eRepo.save(egzamin);
 			
 			/*
@@ -316,7 +299,6 @@ public class DataInitializer {
 			
 			u1 = uRepo.findByIdAndFetchOcenaEagerly(u1.getId()).get();
 			
-			
 			/*
 			 * oceniam zadanie domowe
 			 */
@@ -324,15 +306,6 @@ public class DataInitializer {
 			
 			ocenaRepo.save(ocena);
 			
-			
-			
-			//System.out.println(oRepo.findByPeselAndPassword("16", "1234"));
-//			
-//			Osoba o = oRepo.findByPeselAndFetchAdresEagerly("1").get();
-//			System.out.println(o.getAdres());
-			
-			
-
 		
 	}
 

@@ -3,7 +3,6 @@ package edu.pla.mas.mas_projekt_s17476.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
-
 /**
  * 
  * @author Grzegorz Frączek

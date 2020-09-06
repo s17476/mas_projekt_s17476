@@ -21,16 +21,15 @@ import net.miginfocom.swing.MigLayout;
 
 public class Creator extends JFrame {
 
-	private JFrame frame = this;
 	private JPanel contentPane;
 
-	JButton cancelButton = new JButton("Anuluj");
+	private JButton cancelButton = new JButton("Anuluj");
 	
-	JComboBox<Przedmiot> comboPrzedmiot = new JComboBox<Przedmiot>();
+	private JComboBox<Przedmiot> comboPrzedmiot = new JComboBox<Przedmiot>();
 	
-	JComboBox<Grupa> comboGrupa = new JComboBox<Grupa>();
+	private JComboBox<Grupa> comboGrupa = new JComboBox<Grupa>();
 	
-	JButton dalejButton = new JButton("Dalej");
+	private JButton dalejButton = new JButton("Dalej");
 	
 	/**
 	 * Create the frame.
@@ -38,7 +37,6 @@ public class Creator extends JFrame {
 	public Creator(String name) {
 		super(name);
 
-		
 		setBounds(100, 100, 450, 250);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -67,39 +65,9 @@ public class Creator extends JFrame {
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, "cell 0 12 3 1,growx");
-		
-
-		
+	
 		panel.add(cancelButton);
-		
-		
-		/**
-		 * przycisk dalej
-		 */
-		
-//		btnNewButton_1.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				PrzedmiotGrupa pg = (PrzedmiotGrupa)przedmiotyWGrupach
-//					.stream()
-//					.filter(x -> x.getPrzedmiot().equals((Przedmiot)comboPrzedmiot.getSelectedItem()))
-//					.filter(x -> x.getGrupa().equals((Grupa)comboGrupa.getSelectedItem()))
-//					.toArray()[0];
-//				System.out.println(pg);
-//				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-//				EventQueue.invokeLater(new Runnable() {
-//					public void run() {
-//						try {
-//							new Selection("Wybierz pytania", frame, db, pg);
-//							
-//						} catch (Exception e) {
-//							e.printStackTrace();
-//						}
-//					}
-//				});
-//			}
-//		});
 		panel.add(dalejButton);
-//		pack();
 		setResizable(false);
 		setLocationRelativeTo(null);
 
@@ -121,6 +89,4 @@ public class Creator extends JFrame {
 		return dalejButton;
 	}
 
-	
-	
 }
