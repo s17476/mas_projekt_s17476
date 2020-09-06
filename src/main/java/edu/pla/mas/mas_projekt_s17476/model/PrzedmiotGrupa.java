@@ -89,6 +89,11 @@ public class PrzedmiotGrupa {
 	public void setEgzaminy(Egzamin egzaminy) {
 		this.egzaminy.add(egzaminy);
 	}
+
+	@Override
+	public String toString() {
+		return "PrzedmiotGrupa [przedmiot=" + przedmiot + "]";
+	}
 	
 	
 	

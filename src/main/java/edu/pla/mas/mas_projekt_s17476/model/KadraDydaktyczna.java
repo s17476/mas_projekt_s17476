@@ -67,6 +67,13 @@ public class KadraDydaktyczna {///////////////////////////////////dodać grupy
 
 
 
+	public long getId() {
+		return id;
+	}
+
+
+
+
 	@Override
 	public String toString() {
 		return "Kadra dydaktyczna";

@@ -8,6 +8,9 @@ import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 /**
  * 
  * @author Grzegorz Frączek
@@ -24,13 +27,14 @@ public class PytanieEgzaminacyjne {
 	@NotBlank
 	private String trescPytania;
 	
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection(targetClass = String.class)
 	private List<String> zleOdpowiedzi = new ArrayList<>();
-	
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection(targetClass = String.class)
 	private List<String> dobreOdpowiedzi = new ArrayList<>();
 	
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinColumn(name = "przedmiot_id")
 	private Przedmiot przedmiot;
 	
@@ -87,6 +91,13 @@ public class PytanieEgzaminacyjne {
 
 	public void setEgzaminy(Egzamin egzaminy) {
 		this.egzaminy.add(egzaminy);
+	}
+
+	@Override
+	public String toString() {
+		if(trescPytania.length() > 40)
+			return trescPytania.substring(0, 37) + "...";
+		return "" +trescPytania;
 	}
 	
 	

@@ -96,10 +96,15 @@ public class Przedmiot {
 		this.pytania.add(pytania);
 	}
 
+	public long getId() {
+		return id;
+	}
 
+
+	
 	@Override
 	public String toString() {
-		return "Przedmiot [nazwaPrzedmiotu=" + nazwaPrzedmiotu + ", symbol=" + symbol + ", opis=" + opis + "]";
+		return "[" + symbol + "] " + nazwaPrzedmiotu;
 	}
 	
 	

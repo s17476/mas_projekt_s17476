@@ -214,12 +214,14 @@ public class DataInitializer {
 			
 			List<Grupa> grupy = (List<Grupa>) gRepo.findAllEagerly();
 			
+			System.out.println("Grupy" + grupy);
+			
 //			System.out.println(" NAUCZYCIELE             " + nauczyciele);
 			
 			List<PrzedmiotGrupa> pg = List.of(
 					new PrzedmiotGrupa(przedmioty.get(0), grupy.get(0), nauczyciele.get(0)),
 					new PrzedmiotGrupa(przedmioty.get(1), grupy.get(0), nauczyciele.get(0)),
-					new PrzedmiotGrupa(przedmioty.get(2), grupy.get(0), nauczyciele.get(0)),
+					new PrzedmiotGrupa(przedmioty.get(2), grupy.get(2), nauczyciele.get(0)),
 					new PrzedmiotGrupa(przedmioty.get(0), grupy.get(1), nauczyciele.get(0)),
 					new PrzedmiotGrupa(przedmioty.get(1), grupy.get(1), nauczyciele.get(0)),
 					new PrzedmiotGrupa(przedmioty.get(2), grupy.get(1), nauczyciele.get(0)),

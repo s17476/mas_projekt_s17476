@@ -59,6 +59,12 @@ public class KadraAdministracyjna {
 		this.osoba = osoba;
 	}
 	
+	
+	
+	public long getId() {
+		return id;
+	}
+
 	@Override
 	public String toString() {
 		return "Kadra administracyjna";

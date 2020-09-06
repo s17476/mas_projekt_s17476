@@ -46,6 +46,9 @@ public class MainWindow extends JFrame {
 	CardLayout cl;
 	JPanel cardsPanel = new JPanel();
 	//public final JComboBox<Egzamin> comboBox_1;
+	JButton showGradesButton = new JButton("Pokaż moje oceny");
+	JList<Ocena> gradesList = new JList<Ocena>(new DefaultListModel<Ocena>());
+	JButton newTestButton = new JButton("Nowy test");
 
 	/**
 	 * Create the frame.
@@ -93,10 +96,6 @@ public class MainWindow extends JFrame {
 		FlowLayout flowLayout = (FlowLayout) panel_7.getLayout();
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		
-		/**
-		 * wybór funkcji użytkownika w oknie głównym
-		 */
-		
 		contentPane.add(cardsPanel, "cell 1 1 5 1,grow");
 		cardsPanel.setLayout(new CardLayout());
 		cl = (CardLayout)cardsPanel.getLayout();
@@ -139,8 +138,7 @@ public class MainWindow extends JFrame {
 //		});
 		
 		uczen.add(btnNewButton_8, "cell 0 2");
-		DefaultListModel<Ocena> lm = new DefaultListModel();
-		JList list_1 = new JList(lm);
+		
 		JLabel lblNewLabel_4 = new JLabel("Moduł uczeń");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		uczen.add(lblNewLabel_4, "cell 1 4");
@@ -149,32 +147,15 @@ public class MainWindow extends JFrame {
 		/**
 		 * pobiera oceny z bazy danych
 		 */
-		JButton btnNewButton_9 = new JButton("Pokaż moje oceny");
-//		btnNewButton_9.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				try {
-//					CriteriaBuilder cb = db.getCriteriaBuilder();
-//					CriteriaQuery<Ocena> cr = cb.createQuery(Ocena.class);
-//					Root<Ocena> root = cr.from(Ocena.class);
-//					
-//					cr.select(root).where(cb.equal(root.get("uczen"), user.getUczen()));/////////////////////////////////////////////////////////////////////
-//					
-//					Query<Ocena> query = db.createQuery(cr);
-//					List<Ocena> results = (List<Ocena>)query.getResultList();
-//					
-//					results.forEach(x -> {
-//						if(!lm.contains(x))
-//							lm.addElement(x);
-//					});
-//				}catch(Exception exc) {}
-//			}
-//		});
-		uczen.add(btnNewButton_9, "cell 0 5");
+		
+	
+
+		uczen.add(showGradesButton, "cell 0 5");
 		
 		JPanel panel_4 = new JPanel();
 		uczen.add(panel_4, "cell 0 6 1 2,grow");
 		
-		panel_4.add(list_1);
+		panel_4.add(gradesList);
 		
 		/**
 		 * pobiera dostępne egzaminy
@@ -218,25 +199,8 @@ public class MainWindow extends JFrame {
 		panel_1.add(separator, "cell 0 2,grow");
 		
 		
-		/**
-		 * kreator nowego testu
-		 */
-		JButton btnNewButton_6 = new JButton("Nowy test");
-//		btnNewButton_6.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				frame.setEnabled(false);
-//				EventQueue.invokeLater(new Runnable() {
-//					public void run() {
-//						try {
-//							new Creator("Utwórz nowy test", db, frame);
-//						} catch (Exception e) {
-//							e.printStackTrace();
-//						}
-//					}
-//				});
-//			}
-//		});
-		panel_1.add(btnNewButton_6, "cell 0 3,growx");
+		
+		panel_1.add(newTestButton, "cell 0 3,growx");
 		
 		JButton btnNewButton_7 = new JButton("Pokaż testy");
 		panel_1.add(btnNewButton_7, "cell 0 4,growx");
@@ -292,6 +256,18 @@ public class MainWindow extends JFrame {
 
 	public JPanel getCardsPanel() {
 		return cardsPanel;
+	}
+
+	public JButton getShowGradesButton() {
+		return showGradesButton;
+	}
+
+	public JList getGradesList() {
+		return gradesList;
+	}
+
+	public JButton getNewTestButton() {
+		return newTestButton;
 	}
 	
 	

@@ -105,6 +105,12 @@ public class Ocena {
 	public void setEgzamin(Egzamin egzamin) {
 		this.egzamin = egzamin;
 	}
+
+	@Override
+	public String toString() {
+		return "Ocena [dataWystawienia=" + dataWystawienia + ", ocena=" + ocena + ", komentarz=" + komentarz
+				+ ", uczen=" + uczen.getOsoba().getImie() + "]";
+	}
 	
 	
 	
