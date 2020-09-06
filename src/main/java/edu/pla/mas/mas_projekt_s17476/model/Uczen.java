@@ -3,7 +3,6 @@ package edu.pla.mas.mas_projekt_s17476.model;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +13,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import com.sun.istack.Nullable;
@@ -26,7 +24,7 @@ import com.sun.istack.Nullable;
  */
 
 @Entity
-public class Uczen {///////////////////////////////////dodać grupe
+public class Uczen {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,14 +36,11 @@ public class Uczen {///////////////////////////////////dodać grupe
 	
 	private LocalDate dataRozpoczecia;
 	
-	
-	//private SetOsoba opiekun;
-	
 	@Nullable
 	private LocalDate dataUkonczeniaSzkoly;
 	
 
-	@ManyToOne(cascade = CascadeType.MERGE)//////////////////////////////poprawić
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "grupa_id")
 	private Grupa grupa;
 	
@@ -61,26 +56,12 @@ public class Uczen {///////////////////////////////////dodać grupe
 
 	public Uczen() {}
 	
-	
-
 	public Uczen(LocalDate dataRozpoczecia, LocalDate dataUkonczeniaSzkoly, Grupa grupa) {
 		this.dataRozpoczecia = dataRozpoczecia;
 		this.dataUkonczeniaSzkoly = dataUkonczeniaSzkoly;
 		this.grupa = grupa;
 		grupa.setListaUcznow(this);
 	}
-
-
-
-
-
-
-
-
-
-
-
-
 
 	public Osoba getOsoba() {
 		return osoba;
@@ -90,73 +71,58 @@ public class Uczen {///////////////////////////////////dodać grupe
 		this.osoba = osoba;
 	}
 
-
-
 	public LocalDate getDataRozpoczecia() {
 		return dataRozpoczecia;
 	}
-
-
 
 	public void setDataRozpoczecia(LocalDate dataRozpoczecia) {
 		this.dataRozpoczecia = dataRozpoczecia;
 	}
 
-
-
 	public LocalDate getDataUkonczeniaSzkoly() {
 		return dataUkonczeniaSzkoly;
 	}
-
-
 
 	public void setDataUkonczeniaSzkoly(LocalDate dataUkonczeniaSzkoly) {
 		this.dataUkonczeniaSzkoly = dataUkonczeniaSzkoly;
 	}
 
-
-
 	public Grupa getGrupa() {
 		return grupa;
 	}
-
-
 
 	public void setGrupa(Grupa grupa) {
 		this.grupa = grupa;
 	}
 
-
-
 	public Set<Osoba> getOpiekunowie() {
 		return opiekunowie;
 	}
-
-
 
 	public void setOpiekunowie(Osoba osoba) {
 		this.opiekunowie.add(osoba);
 		osoba.setPodopieczni(this);
 	}
 
-
-
 	public long getId() {
 		return id;
 	}
-
-
 
 	public Set<Ocena> getOcena() {
 		return ocena;
 	}
 
-
-
 	public void setOcena(Ocena ocena) {
 		this.ocena.add(ocena);
 	}
 	
+	public void przeslijPraceDomowa() {}
+	
+	public void pobierzMaterialy() {}
+	
+	public void rozwiazEgzamin() {}
+	
+	public void skontaktujSieZ() {}
 	
 	@Override
 	public String toString() {

@@ -41,9 +41,6 @@ public class Przedmiot {
 	@OneToMany(mappedBy = "przedmiot")
 	private Set<PytanieEgzaminacyjne> pytania = new HashSet<PytanieEgzaminacyjne>();
 	
-	
-	
-	
 	public Przedmiot() {}
 
 	public Przedmiot(String nazwaPrzedmiotu, String symbol, String opis) {
@@ -76,8 +73,6 @@ public class Przedmiot {
 		this.opis = opis;
 	}
 
-	
-	
 	public Set<PrzedmiotGrupa> getPrzedmiotGrupa() {
 		return przedmiotGrupa;
 	}
@@ -86,8 +81,6 @@ public class Przedmiot {
 		this.przedmiotGrupa.add(przedmiotGrupa);
 	}
 
-	
-	
 	public Set<PytanieEgzaminacyjne> getPytania() {
 		return pytania;
 	}
@@ -100,12 +93,8 @@ public class Przedmiot {
 		return id;
 	}
 
-
-	
 	@Override
 	public String toString() {
 		return "[" + symbol + "] " + nazwaPrzedmiotu;
 	}
-	
-	
 }

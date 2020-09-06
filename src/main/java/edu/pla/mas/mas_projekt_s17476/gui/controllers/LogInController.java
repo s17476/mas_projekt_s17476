@@ -44,7 +44,6 @@ public class LogInController {
 				
 				if(user.isPresent()) { 
 					close();
-//					System.out.println(user.get());
 					SwingUtilities.invokeLater(() -> {
 						mainWindowController.showGui(user.get());
 					});

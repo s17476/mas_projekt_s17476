@@ -6,10 +6,8 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import java.util.ArrayList;
 import java.util.List;
 import java.awt.CardLayout;
 import javax.swing.JComboBox;
@@ -17,12 +15,12 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import javax.swing.JSeparator;
 import javax.swing.border.SoftBevelBorder;
-
 import edu.pla.mas.mas_projekt_s17476.model.Egzamin;
 import edu.pla.mas.mas_projekt_s17476.model.Ocena;
-import edu.pla.mas.mas_projekt_s17476.model.Osoba;
 import javax.swing.border.BevelBorder;
 import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 
 /**
  * 
@@ -32,37 +30,33 @@ import javax.swing.JList;
 
 public class MainWindow extends JFrame {
 	
-	private Osoba user;
 	private JPanel contentPane;
 	public JFrame frame = this;
 	
 	//etykieta powitalna
-	JLabel welcomeLabel = new JLabel("");
+	private JLabel welcomeLabel = new JLabel("");
 	
 	//role użytkownika
-	JComboBox rolesComboBox = new JComboBox();
+	private JComboBox rolesComboBox = new JComboBox();
 	
-	JButton closeButton = new JButton("Zamknij");
+	private JButton closeButton = new JButton("Zamknij");
 	
 	//cards layout
-	CardLayout cl;
-	JPanel cardsPanel = new JPanel();
-	JComboBox<Egzamin> egzaminy = new JComboBox<>();
-	JButton showGradesButton = new JButton("Pokaż moje oceny");
-	JList<Ocena> gradesList = new JList<Ocena>(new DefaultListModel<Ocena>());
-	JButton newTestButton = new JButton("Nowy test");
-	JComboBox egzaminyComboBox = new JComboBox();
+	private CardLayout cl;
+	private JPanel cardsPanel = new JPanel();
 	
-	JButton testButton = new JButton("Rozwiąż");
+	private JComboBox<Egzamin> egzaminy = new JComboBox<>();
+	private JButton showGradesButton = new JButton("Pokaż moje oceny");
+	private JList<Ocena> gradesList = new JList<Ocena>();
+	private JButton newTestButton = new JButton("Nowy test");
+	private JComboBox egzaminyComboBox = new JComboBox();
+	private JButton testButton = new JButton("Rozwiąż");
 
-	/**
-	 * Create the frame.
-	 */
+
 	public MainWindow(String tytul) {
 		super(tytul);
-		testButton.setEnabled(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 958, 400);
+		setBounds(100, 100, 1100, 400);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -88,14 +82,9 @@ public class MainWindow extends JFrame {
 		
 		JButton btnNewButton_2 = new JButton("Moje pliki");
 		panel.add(btnNewButton_2);
-		
-		
-		
 
 		panel.add(closeButton);
-		
 
-		
 		JPanel panel_7 = new JPanel();
 		contentPane.add(panel_7, "cell 5 0");
 		FlowLayout flowLayout = (FlowLayout) panel_7.getLayout();
@@ -106,8 +95,7 @@ public class MainWindow extends JFrame {
 		cl = (CardLayout)cardsPanel.getLayout();
 		JLabel lblNewLabel = new JLabel("Zalogowano jako:");
 		panel_7.add(lblNewLabel);
-		
-
+	
 		panel_7.add(rolesComboBox);
 		
 		JPanel welcome = new JPanel();
@@ -122,59 +110,34 @@ public class MainWindow extends JFrame {
 		cardsPanel.add(uczen, "Uczen");
 		uczen.setLayout(new MigLayout("", "[grow][][][][][grow]", "[grow][][][][][][grow][grow]"));
 		
+		JLabel lblNewLabel_4 = new JLabel("Moduł uczeń");
+		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		uczen.add(lblNewLabel_4, "cell 0 0");
+		testButton.setEnabled(false);
+		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		uczen.add(panel_3, "cell 0 0 1 3,grow");
+		uczen.add(panel_3, "cell 0 1 6 1,grow");
 		panel_3.setLayout(new MigLayout("", "[77px,grow]", "[14px][][]"));
 		
 		JLabel lblNewLabel_3 = new JLabel("Dostępne testy:");
 		panel_3.add(lblNewLabel_3, "cell 0 0,alignx left,aligny top");
 		
-		
 		panel_3.add(egzaminyComboBox, "cell 0 1,growx");
 		
 		panel_3.add(testButton, "cell 0 2,alignx right");
 		
-		JLabel lblNewLabel_4 = new JLabel("Moduł uczeń");
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		uczen.add(lblNewLabel_4, "cell 1 4");
-		
-		
-		/**
-		 * pobiera oceny z bazy danych
-		 */
-		
-	
-
-		uczen.add(showGradesButton, "cell 0 5");
-		
 		JPanel panel_4 = new JPanel();
-		uczen.add(panel_4, "cell 0 6 1 2,grow");
+		panel_4.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		uczen.add(panel_4, "cell 0 2 1 6,grow");
+		panel_4.setLayout(new MigLayout("", "[1px][121px,grow][250px]", "[][][][]"));
+		//panel_4.add(gradesList, "cell 0 0,alignx left,aligny center");
+		gradesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		panel_4.add(showGradesButton, "cell 1 0,alignx left,aligny center");
 		
-		panel_4.add(gradesList);
+		JScrollPane scrollPane = new JScrollPane(gradesList);
 		
-		/**
-		 * pobiera dostępne egzaminy
-		 */
-//		if(user.getUczen() != null) {
-//		
-//			CriteriaBuilder cb = db.getCriteriaBuilder();
-//			CriteriaQuery<PrzedmiotGrupa> cr = cb.createQuery(PrzedmiotGrupa.class);
-//			Root<PrzedmiotGrupa> root = cr.from(PrzedmiotGrupa.class);
-//			
-//			cr.select(root).where(cb.equal(root.get("grupa"), user.getUczen().getGrupa()));
-//			System.out.println("Grupa"+user.getUczen().getGrupa());
-//			 
-//			Query<PrzedmiotGrupa> query = db.createQuery(cr);
-//			List<PrzedmiotGrupa> results = (List<PrzedmiotGrupa>)query.getResultList();
-//			
-//			comboBox_1 = new JComboBox(results.get(0).getListaEgzaminow().toArray());
-//			uczen.add(comboBox_1, "cell 0 0");
-//			
-//			System.out.println("Jest grupa "+results);
-//		}
-//		else
-//			comboBox_1 = new  JComboBox();
+		panel_4.add(scrollPane, "cell 1 1 2 3,grow");
 		
 		JPanel nauczyciel = new JPanel();
 		nauczyciel.setBorder(null);
@@ -194,8 +157,6 @@ public class MainWindow extends JFrame {
 		JSeparator separator = new JSeparator();
 		panel_1.add(separator, "cell 0 2,grow");
 		
-		
-		
 		panel_1.add(newTestButton, "cell 0 3,growx");
 		
 		JButton btnNewButton_7 = new JButton("Pokaż testy");
@@ -207,7 +168,6 @@ public class MainWindow extends JFrame {
 		
 		JPanel panel_6 = new JPanel();
 		welcome.add(panel_6, "cell 0 1 6 1,grow");
-		//////////////////
 		
 		welcomeLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panel_6.add(welcomeLabel);
@@ -221,13 +181,6 @@ public class MainWindow extends JFrame {
 		this.setMinimumSize(new Dimension(300, 400));
 		setPreferredSize(new Dimension(1000, 700));
 		setLocationRelativeTo(null);
-
-
-		
-	}
-
-	public void setUser(Osoba user) {
-		this.user = user;
 	}
 
 	public void setWelcomeLabel(String userName) {
@@ -289,7 +242,5 @@ public class MainWindow extends JFrame {
 	public void setTestButton(JButton testButton) {
 		this.testButton = testButton;
 	}
-	
-	
 	
 }

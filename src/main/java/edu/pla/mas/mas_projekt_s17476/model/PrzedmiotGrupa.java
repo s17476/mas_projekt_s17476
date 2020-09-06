@@ -35,7 +35,6 @@ public class PrzedmiotGrupa {
 			)
 	Set<Egzamin> egzaminy = new HashSet<Egzamin>();
 	
-	
 	public PrzedmiotGrupa() {}
 
 	public PrzedmiotGrupa(Przedmiot przedmiot, Grupa grupa, KadraDydaktyczna dydaktyk) {
@@ -54,28 +53,23 @@ public class PrzedmiotGrupa {
 		return przedmiot;
 	}
 
-
 	public void setPrzedmiot(Przedmiot przedmiot) {
 		this.przedmiot = przedmiot;
 		przedmiot.setPrzedmiotGrupa(this);
 	}
 
-
 	public KadraDydaktyczna getDydaktyk() {
 		return dydaktyk;
 	}
-
 
 	public void setDydaktyk(KadraDydaktyczna dydaktyk) {
 		this.dydaktyk = dydaktyk;
 		dydaktyk.setPrzedmiotGrupa(this);
 	}
 
-
 	public Grupa getGrupa() {
 		return grupa;
 	}
-
 
 	public void setGrupa(Grupa grupa) {
 		this.grupa = grupa;
@@ -90,10 +84,6 @@ public class PrzedmiotGrupa {
 		this.egzaminy.add(egzaminy);
 	}
 
-	@Override
-	public String toString() {
-		return "PrzedmiotGrupa [przedmiot=" + przedmiot + "]";
-	}
 
 	public long getId() {
 		return id;
@@ -102,7 +92,10 @@ public class PrzedmiotGrupa {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "PrzedmiotGrupa [przedmiot=" + przedmiot + "]";
+	}
 	
 }

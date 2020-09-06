@@ -29,22 +29,22 @@ import edu.pla.mas.mas_projekt_s17476.repository.UczenRepo;
 public class EgzaminViewController {
 	
 	@Autowired
-	EgzaminRepo eRepo;
+	private EgzaminRepo eRepo;
 	
 	@Autowired
-	UczenRepo uRepo;
+	private UczenRepo uRepo;
 	
 	@Autowired
-	OcenaRepo oRepo;
+	private OcenaRepo oRepo;
 	
-	MainWindow mainWindow;
-	Egzamin egzamin;
+	private MainWindow mainWindow;
+	private Egzamin egzamin;
 	
-	EgzaminView view;
+	private EgzaminView view;
 	
-	Thread thread;
+	private Thread thread;
 	
-	Osoba user;
+	private Osoba user;
 
 	public EgzaminViewController() {
 		
@@ -81,7 +81,6 @@ public class EgzaminViewController {
 				if(rc == 1) {
 					int rezultat = egzamin.check(view.getTest());
 					JOptionPane.showMessageDialog(view, "Uzyskałeś " + rezultat + " punktów.", "Wynik egzaminu", JOptionPane.INFORMATION_MESSAGE);
-					//System.out.println(rezultat +  " " + user.getUczen() + " " + egzamin);
 					var ocena = new Ocena(LocalDate.now(), 
 							rezultat, 
 							"", 
@@ -107,18 +106,22 @@ public class EgzaminViewController {
 		thread = new Thread(new Runnable () {
 	        @Override
 	        public void run() {
-	            int countdownSeconds = egzamin.getDostepnyCzas() * 60;
-
-	            for (int i = countdownSeconds ; i >= 0; i--) {
-	                try{
-	                    Thread.sleep(1000);
-	                }catch (InterruptedException e) {}
-	                
-	                int minuty = (int)i/60;
-	                int sekundy = i-(minuty*60);
-	                view.getTimerLabel().setText(minuty + ":" +sekundy);
-	            }
-	            view.getEndExam().doClick();
+	        	try{
+	        		while(!Thread.interrupted()) {
+			            int countdownSeconds = egzamin.getDostepnyCzas() * 60;
+		
+			            for (int i = countdownSeconds ; i >= 0; i--) {
+			                
+			                    Thread.sleep(1000);
+			                
+			                
+			                int minuty = (int)i/60;
+			                int sekundy = i-(minuty*60);
+			                view.getTimerLabel().setText(minuty + ":" +sekundy);
+			            }
+			            view.getEndExam().doClick();
+	        		}
+	        	}catch (InterruptedException e) {}
 	        }
 	    });
 		thread.start();

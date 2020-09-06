@@ -19,8 +19,4 @@ public interface OsobaRepo extends CrudRepository<Osoba, String>{
 	@Query("SELECT c FROM Osoba c LEFT JOIN FETCH c.podopieczni WHERE c.pesel = (:pesel)")
 	Optional<Osoba> findByPeselAndFetchPodopieczniEagerly(@Param("pesel") String pesel);
 
-	
-
-	
-
 }

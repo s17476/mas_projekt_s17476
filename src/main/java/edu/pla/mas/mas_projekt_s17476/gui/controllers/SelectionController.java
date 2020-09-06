@@ -49,7 +49,6 @@ public class SelectionController {
 	private PrzedmiotGrupa przedmiotGrupa;
 	private List<PytanieEgzaminacyjne> pytania;
 	
-
 	public SelectionController() {
 		view = new Selection("Wybór pytań");
 		addListeners();
@@ -59,11 +58,11 @@ public class SelectionController {
 		this.przedmiotGrupa = przedmiotGrupa;
 		this.mainWindow = mainWindow;
 		this.mainWindow.setEnabled(false);
+		view.getAnswerLabel().setText("");
+		view.getLabel().setText("");
 		view.setVisible(true);
 		initData();
 	}
-
-
 
 	private void initData() {
 		DefaultListModel<PytanieEgzaminacyjne> lista = view.getListModel();
@@ -83,8 +82,6 @@ public class SelectionController {
 		
 	}
 
-
-
 	private void addListeners() {
 		// utwórz nowy egzamin
 		view.getCreateExam().addActionListener(new ActionListener() {
@@ -103,17 +100,16 @@ public class SelectionController {
 				view.getListModel().removeAllElements();
 				pgRepo.save(przedmiotGrupa);
 				eRepo.save(egz);
+				
 				JOptionPane.showMessageDialog(view, "Egzamin zapisany!");
 				view.dispatchEvent(new WindowEvent(view, WindowEvent.WINDOW_CLOSING));
+				
 			}catch(Exception exc) {
 				JOptionPane.showMessageDialog(view, "Sprawdź wprowadzone dane!");
 			}
 			}
 		});
 
-
-		
-		
 		// zamknięcie okna
 		view.addWindowListener(new java.awt.event.WindowAdapter() {
 		    @Override
@@ -136,6 +132,7 @@ public class SelectionController {
 			public void actionPerformed(ActionEvent e) {
 				if(view.getList().getSelectedIndex() > -1) {
 					view.getLabel().setText("");
+					view.getAnswerLabel().setText("");
 					PytanieEgzaminacyjne pe = view.getListModel().get(view.getList().getSelectedIndex());
 					view.getListModel().remove(view.getList().getSelectedIndex());
 					view.getList1Model().addElement(pe);
@@ -157,39 +154,42 @@ public class SelectionController {
 			
 		// wyswietlanie zaznaczonego pytania
 		view.getList().addListSelectionListener(new ListSelectionListener() {
-		public void valueChanged(ListSelectionEvent e) {
-			try {
-				String s = view.getListModel().get(view.getList().getSelectedIndex()).getTrescPytania();
-				view.getLabel().setText(s);
-			}catch(Exception exc) {}
-			try {
-				PytanieEgzaminacyjne p = (PytanieEgzaminacyjne)view.getListModel().get(view.getList().getSelectedIndex());
-				List<String> zle = p.getZleOdpowiedzi();
-				List<String> dobre = p.getDobreOdpowiedzi();
-				String odpowiedzi = "<html><pre>";
-				for (int i = 1; i <= zle.size(); i++) {
-					odpowiedzi += i + ". <font color=red>" + zle.get(i-1) + "</font><br>";
-				}
-				for (int i = 1; i <= dobre.size(); i++) {
-					odpowiedzi += i+zle.size() + ".  <font color=green>" + dobre.get(i-1) + "</font><br>";
-				}
-				odpowiedzi+="</pre></html>";
-				view.getAnswerLabel().setText(odpowiedzi);
-			}catch(Exception exc) {}
+			public void valueChanged(ListSelectionEvent e) {
+				try {
+					String s = view.getListModel().get(view.getList().getSelectedIndex()).getTrescPytania();
+					view.getLabel().setText(s);
+				}catch(Exception exc) {}
+				try {
+					PytanieEgzaminacyjne p = (PytanieEgzaminacyjne)view.getListModel().get(view.getList().getSelectedIndex());
+					List<String> zle = p.getZleOdpowiedzi();
+					List<String> dobre = p.getDobreOdpowiedzi();
+					String odpowiedzi = "<html><pre>";
+					for (int i = 1; i <= zle.size(); i++) {
+						if(zle.get(i-1).length() > 60)
+							odpowiedzi += i + ". <font color=red>" + zle.get(i-1).substring(0, 60) + "<br>" + zle.get(i-1).substring(60, zle.get(i-1).length()) + "</font><br>";
+						else
+							odpowiedzi += i + ". <font color=red>" + zle.get(i-1) + "</font><br>";
+					}
+					for (int i = 1; i <= dobre.size(); i++) {
+						if(dobre.get(i-1).length() > 60)
+							odpowiedzi += i+zle.size() + ".  <font color=green>" + dobre.get(i-1).substring(0, 60) + "<br>" +  dobre.get(i-1).substring(60, dobre.get(i-1).length()) + "</font><br>";
+						else
+							odpowiedzi += i+zle.size() + ".  <font color=green>" + dobre.get(i-1) + "</font><br>";
+					}
+					odpowiedzi+="</pre></html>";
+					view.getAnswerLabel().setText(odpowiedzi);
+				}catch(Exception exc) {}
 			}
 		});
 		
 		//przycisk nowe pytanie
 		view.getNewQuestion().addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			SwingUtilities.invokeLater(() ->{
-				//System.out.println(przedmiotGrupa.getPrzedmiot());
-				pytanieController.showGui(view, przedmiotGrupa.getPrzedmiot());
-				view.setEnabled(false);
-		
-				
-			});
-		}
-	});
+			public void actionPerformed(ActionEvent e) {
+				SwingUtilities.invokeLater(() ->{
+					pytanieController.showGui(view, przedmiotGrupa.getPrzedmiot());
+					view.setEnabled(false);
+				});
+			}
+		});
 	}
 }

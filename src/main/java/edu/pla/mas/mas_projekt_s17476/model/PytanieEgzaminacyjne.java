@@ -95,12 +95,19 @@ public class PytanieEgzaminacyjne {
 
 	@Override
 	public String toString() {
-		if(trescPytania.length() > 40)
-			return trescPytania.substring(0, 37) + "...";
+		if(trescPytania.length() > 55)
+			return trescPytania.substring(0, 52) + "...";
 		return "" +trescPytania;
 	}
 	
+	public void getRightAnswer() {}
 	
+	public void addAnswer() {}
 	
+	public void delAnswer() {}
+	
+	public void getRandomAnswers() {}
+	
+	public void usun() {}
 	
 }

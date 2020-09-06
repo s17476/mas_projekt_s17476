@@ -49,16 +49,13 @@ public class LogIn extends JFrame {
 		JPanel panel_1 = new JPanel();
 		panel.add(panel_1, "cell 0 2 3 1,grow");
 		
-
 		panel_1.add(btnNewButton);
 		
 		getRootPane().setDefaultButton(btnNewButton);
 		pack();
 		setLocationRelativeTo(null);
-
 	}
 	
-
 	public JButton getLogInButton() {
 		return btnNewButton;
 	}

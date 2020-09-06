@@ -38,9 +38,9 @@ public class CreatorController {
 	
 	private MainWindow mainWindow;
 	
-	List<PrzedmiotGrupa> przedmiotyWGrupach;
+	private List<PrzedmiotGrupa> przedmiotyWGrupach;
 	
-	PrzedmiotGrupa przedmiotGrupa;
+	private PrzedmiotGrupa przedmiotGrupa;
 	
 	public CreatorController() {
 		view = new Creator("Nowy test");

@@ -81,9 +81,6 @@ public class Osoba {
 		adres.setOsoba(this);
 	}
 
-
-
-
 	public String getImie() {
 		return imie;
 	}
@@ -116,8 +113,6 @@ public class Osoba {
 		this.pesel = pesel;
 	}
 	
-	
-	
 	public LocalDate getDataUrodzenia() {
 		return dataUrodzenia;
 	}
@@ -135,17 +130,8 @@ public class Osoba {
 		adres.setOsoba(this);
 	}
 	
-	
-
 	public KadraAdministracyjna getKadraAdmin() {
 		return kadraAdmin;
-	}
-
-
-
-	@Override
-	public String toString() {
-		return this.imie+" "+this.nazwisko+" "+this.pesel+" "+this.password + "\n" + kadraAdmin + "\n" + kadraDydaktyczna + "\n" + uczen + "\n";
 	}
 
 	public void setKadraAdmin(KadraAdministracyjna kadraAdmin) {
@@ -180,6 +166,9 @@ public class Osoba {
 		this.podopieczni.add(uczen);
 	}
 	
-	
+	@Override
+	public String toString() {
+		return this.imie+" "+this.nazwisko+" "+this.pesel+" "+this.password + "\n" + kadraAdmin + "\n" + kadraDydaktyczna + "\n" + uczen + "\n";
+	}
 	
 }

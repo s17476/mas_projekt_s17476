@@ -64,7 +64,6 @@ public class MainWindowController {
 	
 	public void showGui(Osoba user) {
 		this.user = user;
-		view.setUser(user);
 		initData(user);
 		initListeners();
 		view.setVisible(true);
@@ -100,7 +99,6 @@ public class MainWindowController {
 					List<Ocena> grades;
 					if(uczen.isPresent()) {
 						grades = new ArrayList<Ocena>(uczen.get().getOcena());
-						System.out.println(grades);
 						DefaultListModel<Ocena> dlm = (DefaultListModel<Ocena>) view.getGradesList().getModel();
 						dlm.removeAllElements();
 					grades.forEach(x -> dlm.addElement(x));
@@ -126,7 +124,6 @@ public class MainWindowController {
 				Egzamin egz = (Egzamin) view.getEgzaminyComboBox().getModel().getSelectedItem();
 					if(egz != null)
 					SwingUtilities.invokeLater(() ->{
-						System.out.println("zaczynamy egzamin");
 						evController.showGui(egz, view, user);
 					});
 			}catch(Exception exc){}
@@ -153,7 +150,7 @@ public class MainWindowController {
 			list.add(user.getKadraDydaktyczna());
 		
 		
-		//czy jest uczniem
+		//czy jest uczniem + wczytywanie dostępnych dla ucznia materiałów
 		if(user.getUczen() != null) {
 			list.add(user.getUczen());
 			Grupa grupa = user.getUczen().getGrupa();
@@ -163,7 +160,6 @@ public class MainWindowController {
 			if (pg.isPresent()) {
 				Set<PrzedmiotGrupa> pgg = pg.get().getPrzedmiotGrupa();
 				Set<PrzedmiotGrupa> peEager = new HashSet<>();
-				System.out.println("gdggdgddggddggdgd" + pgg);
 				pgg.forEach(x -> peEager.add(pgRepo.findByIdEagerly(x.getId()).get()));
 				List<Set<Egzamin>> egz = new ArrayList<>();
 				peEager.forEach(x -> egz.add(x.getEgzaminy()));
@@ -174,15 +170,16 @@ public class MainWindowController {
 				comboModel.removeAllElements();
 				comboModel.addAll(egzaminy);
 	
-			System.out.println("Egzaminy" +egzaminy);
 				view.getTestButton().setEnabled(true);
 				
 			}
+			DefaultListModel dlm = new DefaultListModel<Ocena>();
+			view.getGradesList().setModel(dlm);
+			dlm.removeAllElements();
+			
 		}
-		
 		
 		// wypełnienie combo box danymi o egzaminach - moduł uczeń
 		view.setRolesComboBox(list);
-
 	}
 }

@@ -106,12 +106,14 @@ public class Ocena {
 		this.egzamin = egzamin;
 	}
 
+	public void edytujOcene() {}
+	
+	public void wystawOcene() {}
+	
+	public void usun() {}
+	
 	@Override
 	public String toString() {
-		return "Ocena [dataWystawienia=" + dataWystawienia + ", ocena=" + ocena + ", komentarz=" + komentarz
-				+ ", uczen=" + uczen.getOsoba().getImie() + "]";
+		return "Ocena: " + ocena + ", data: " +  dataWystawienia + ", komentarz: " + komentarz;
 	}
-	
-	
-	
 }

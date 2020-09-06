@@ -127,15 +127,13 @@ public class EgzaminView extends JFrame {
 			JLabel lblNewLabel_7 = new JLabel(odpowiedzi.get(3));
 			panel_1.add(lblNewLabel_7, "cell 1 5");
 			
-			
-			JCheckBox chckbxNewCheckBox_3 = new JCheckBox("");
+						JCheckBox chckbxNewCheckBox_3 = new JCheckBox("");
 			panel_1.add(chckbxNewCheckBox_3, "cell 2 5");	
 			
 			check.put(odpowiedzi.get(3), chckbxNewCheckBox_3);
 			
 			test.put(pe, check);
 		}
-		
 		
 		/**
 		 * blokuje okno
@@ -182,6 +180,5 @@ public class EgzaminView extends JFrame {
 	public void setTest(Map<PytanieEgzaminacyjne, Map<String, JCheckBox>> test) {
 		this.test = test;
 	}
-
 	
 }

@@ -28,56 +28,43 @@ public class KadraDydaktyczna {
 	@OneToMany(mappedBy = "dydaktyk")
 	private Set<PrzedmiotGrupa> przedmiotGrupa = new HashSet<PrzedmiotGrupa>();
 	
-	
-//	private List<PrzedmiotGrupa> listaPrzedmiotów = new ArrayList<>();
-	
 	public KadraDydaktyczna() {}
 
-
-
-
-//	public KadraDydaktyczna(List<PrzedmiotGrupa> listaPrzedmiotów) {
-//		super();
-//		this.listaPrzedmiotów = listaPrzedmiotów;
-//	}
-	
 	public Osoba getOsoba() {
 		return osoba;
 	}
-
 
 	public void setOsoba(Osoba osoba) {
 		this.osoba = osoba;
 	}
 
-
-
-
 	public Set<PrzedmiotGrupa> getPrzedmiotGrupa() {
 		return przedmiotGrupa;
 	}
-
-
-
 
 	public void setPrzedmiotGrupa(PrzedmiotGrupa przedmiotGrupa) {
 		this.przedmiotGrupa.add(przedmiotGrupa);
 	}
 
-
-
-
 	public long getId() {
 		return id;
 	}
+	
+	public void sprawdzWyniki() {}
 
-
-
-
+	public void wystawOcene() {}
+	
+	public void stworzEgzamin() {}
+	
+	public void stworzPraceDomowa() {}
+	
+	public void edytujOcene() {}
+	
+	public void sprawdzPraceDomowa() {}
+	
 	@Override
 	public String toString() {
 		return "Kadra dydaktyczna";
 	}
-	
 	
 }

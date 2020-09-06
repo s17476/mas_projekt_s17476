@@ -6,8 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,7 +18,6 @@ import javax.persistence.OneToMany;
 import javax.swing.JCheckBox;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
 import com.sun.istack.Nullable;
 
 /**
@@ -32,7 +29,6 @@ import com.sun.istack.Nullable;
 @Entity
 public class Egzamin{
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -43,7 +39,6 @@ public class Egzamin{
 	@Nullable
 	private int iloscPunktow;
 	
-	
 	public int dostepnyCzas;
 	
 	public LocalDate dostepnyOd;
@@ -52,8 +47,6 @@ public class Egzamin{
 	@Nullable
 	@OneToMany(mappedBy = "egzamin")
 	private Set<Ocena> ocena = new HashSet<Ocena>();
-	
-	//public Ocena ocena;
 	
 	@ManyToMany
 	@JoinTable(
@@ -87,7 +80,6 @@ public class Egzamin{
 		this.pytania = pytania;
 		var list = pytania;
 		list.forEach(x -> x.setEgzaminy(this));
-		
 	}
 
 	public String getTytul() {
@@ -146,21 +138,12 @@ public class Egzamin{
 		this.pytania.add(pytania);
 	}
 
-	
-	
 	public Set<Ocena> getOcena() {
 		return ocena;
 	}
 
 	public void setOcena(Ocena ocena) {
 		this.ocena.add(ocena);
-	}
-
-	@Override
-	public String toString() {
-		List<PytanieEgzaminacyjne> pytanie = new ArrayList<>();
-		pytanie.addAll(pytania);
-		return tytul + " z przedmiotu " + pytanie.get(0).getPrzedmiot();
 	}
 
 	public long getId() {
@@ -198,7 +181,29 @@ public class Egzamin{
 			
 		}
 	
-	return punkty;
-}
+		return punkty;
+	}
 	
+	public void uruchom() {}
+	
+	public void zakonczIOcen() {}
+	
+	public void edytuj() {}
+	
+	public void udostepnij() {}
+	
+	public void usun() {}
+	
+	public void pokazWyniki() {}
+	
+	@Override
+	public String toString() {
+		List<PytanieEgzaminacyjne> pytanie = new ArrayList<>();
+		pytanie.addAll(pytania);
+		try {
+			return tytul + " z przedmiotu " + pytanie.get(0).getPrzedmiot();
+		}catch(Exception e) {
+			return null;
+		}
+	}
 }

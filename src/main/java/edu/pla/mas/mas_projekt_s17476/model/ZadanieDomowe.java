@@ -21,7 +21,6 @@ import com.sun.istack.Nullable;
 @Entity
 public class ZadanieDomowe{
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -55,7 +54,6 @@ public class ZadanieDomowe{
 		this.ocena.add(ocena);
 	}
 	
-	
-
+	public void wyslijZadanie() {}
 
 }

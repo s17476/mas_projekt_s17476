@@ -1,5 +1,7 @@
 package edu.pla.mas.mas_projekt_s17476.model;
 
+import java.util.List;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
@@ -49,7 +51,6 @@ public class KadraAdministracyjna {
 		this.zakresObowiazkow = zakresObowiazkow;
 	}
 
-
 	public Osoba getOsoba() {
 		return osoba;
 	}
@@ -58,12 +59,18 @@ public class KadraAdministracyjna {
 		this.osoba = osoba;
 	}
 	
-	
-	
 	public long getId() {
 		return id;
 	}
 
+	public List<Ocena> sprawdzWyniki(Uczen uczen) {
+		return null;
+	}
+	
+	public void przypiszUczniaDoKlasy(Uczen uczen, PrzedmiotGrupa przedmiotGrupa) {}
+	
+	public void przypiszNauczycielaDoPrzedniotu(KadraDydaktyczna nauczyciel, PrzedmiotGrupa przedmiotGrupa) {}
+	
 	@Override
 	public String toString() {
 		return "Kadra administracyjna";

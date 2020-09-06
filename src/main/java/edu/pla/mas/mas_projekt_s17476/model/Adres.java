@@ -104,6 +104,4 @@ public class Adres {
 				+ kodPocztowy + ", telefon=" + telefon + "]";
 	}
 
-	
-	
 }

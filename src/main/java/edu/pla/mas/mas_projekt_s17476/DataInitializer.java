@@ -69,7 +69,7 @@ public class DataInitializer {
 			 * tworzę przykładowe osoby oraz ich adresy
 			 */
 			var a1 = new Adres("Kolejowa", "4", "Legnica", "59-100", "555555555");
-			var a2 = new Adres("Polna", "2", "Poznań", "32-100", "555555555");
+//			var a2 = new Adres("Polna", "2", "Poznań", "32-100", "555555555");
 			
 			var osoby = List.of(
 				new Osoba("Arek", "Arkowski", "1234", "1", "1993-01-02", 

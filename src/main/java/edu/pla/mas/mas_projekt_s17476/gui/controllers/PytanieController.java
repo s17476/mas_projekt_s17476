@@ -26,27 +26,24 @@ public class PytanieController {
 	@Autowired
 	private PytanieEgzaminacyjneRepo peRepo;
 	
-	Selection selectionView;
+	private Selection selectionView;
 	
-	Pytanie view;
+	private Pytanie view;
 	
-	Przedmiot przedmiot;
+	private Przedmiot przedmiot;
 	
 	
 	public PytanieController() {
 		view = new Pytanie("Dodaj nowe pytanie");
 		addListeners();
-		
 	}
 	
 	public void showGui(Selection selectionView, Przedmiot przedmiot) {
 		this.przedmiot = przedmiot;
 		this.selectionView = selectionView;
 		view.setVisible(true);
-		
 	}
 
-	
 	private void addListeners() {
 		
 		//zamknięcie okna
@@ -96,9 +93,6 @@ public class PytanieController {
 				if(view.getButtonGroup4().isSelected(view.getRdbtnNewRadioButton_6().getModel())) zle.add(view.getTextField_4().getText());
 				else dobre.add(view.getTextField_4().getText());
 
-				System.out.println("dobre" + dobre);
-				
-				System.out.println("złe" + zle);
 				PytanieEgzaminacyjne pe = new PytanieEgzaminacyjne(view.getTextField().getText(), zle, dobre,  przedmiot);
 				peRepo.save(pe);
 				
