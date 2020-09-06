@@ -94,6 +94,14 @@ public class PrzedmiotGrupa {
 	public String toString() {
 		return "PrzedmiotGrupa [przedmiot=" + przedmiot + "]";
 	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 	
 	
 	

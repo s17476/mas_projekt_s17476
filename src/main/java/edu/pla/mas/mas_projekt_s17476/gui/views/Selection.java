@@ -40,6 +40,7 @@ public class Selection extends JFrame {
 	private JTextField textField_3;
 	JLabel label = new JLabel();
 	JLabel answerLabel = new JLabel("");
+	JTextField txtPrzykad = new JTextField();
 	
 	JButton anulujButton = new JButton("Anuluj");
 	DefaultListModel<PytanieEgzaminacyjne> listModel = new DefaultListModel<>();
@@ -54,6 +55,8 @@ public class Selection extends JFrame {
 	JLabel przedmiotLabel = new JLabel();
 
 	JButton newQuestion = new JButton("Nowe pytanie");
+	
+	JButton createExam = new JButton("Utwórz egzamin");
 
 	/**
 	 * Create the frame.
@@ -150,11 +153,11 @@ public class Selection extends JFrame {
 
 				panel_4.add(anulujButton);
 				
-				JButton btnNewButton_4 = new JButton("Utwórz egzamin");
-
-				panel_4.add(btnNewButton_4);
 				
-				JTextField txtPrzykad = new JTextField();
+
+				panel_4.add(createExam);
+				
+				
 				txtPrzykad.setText("Przykład");
 				contentPane.add(txtPrzykad, "cell 2 3,growx");
 				txtPrzykad.setColumns(10);
@@ -168,26 +171,7 @@ public class Selection extends JFrame {
 				textField_2.setText("2020-07-13");
 				contentPane.add(textField_2, "cell 2 5,growx");
 				textField_2.setColumns(10);				
-//				btnNewButton_4.addActionListener(new ActionListener() {
-//					public void actionPerformed(ActionEvent e) {
-//					try {
-//							List<PytanieEgzaminacyjne> pe = new ArrayList();
-//							for(int i = 0; i < list1Model.getSize(); i++) {
-//								pe.add(list1Model.get(i));
-//							}
-//							Egzamin egzamin = new Egzamin(txtPrzykad.getText(), pe, 10, Integer.parseInt(textField_1.getText()), 
-//															LocalDate.parse(textField_2.getText()), LocalDate.parse(textField_3.getText()), pg.getPrzedmiot());
-//							pg.dodajEgzamin(egzamin);
-//							db.save(egzamin);
-//							frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-//						}catch(Exception exc) {
-//							exc.printStackTrace();
-//							JOptionPane.showMessageDialog(frame, "Sprawdź wprowadzone dane!");
-//						}
-//					}
-//				});
-
-//		
+	
 		
 
 		pack();
@@ -250,6 +234,51 @@ public class Selection extends JFrame {
 
 	public JButton getNewQuestion() {
 		return newQuestion;
+	}
+
+
+	public JButton getCreateExam() {
+		return createExam;
+	}
+
+
+	public JTextField getTxtPrzykad() {
+		return txtPrzykad;
+	}
+
+
+	public void setTxtPrzykad(JTextField txtPrzykad) {
+		this.txtPrzykad = txtPrzykad;
+	}
+
+
+	public JTextField getTextField_1() {
+		return textField_1;
+	}
+
+
+	public void setTextField_1(JTextField textField_1) {
+		this.textField_1 = textField_1;
+	}
+
+
+	public JTextField getTextField_2() {
+		return textField_2;
+	}
+
+
+	public void setTextField_2(JTextField textField_2) {
+		this.textField_2 = textField_2;
+	}
+
+
+	public JTextField getTextField_3() {
+		return textField_3;
+	}
+
+
+	public void setTextField_3(JTextField textField_3) {
+		this.textField_3 = textField_3;
 	}
 	
 	

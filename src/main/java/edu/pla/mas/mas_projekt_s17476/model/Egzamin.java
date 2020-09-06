@@ -1,12 +1,14 @@
 package edu.pla.mas.mas_projekt_s17476.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -60,7 +62,7 @@ public class Egzamin{
 	private Set<PrzedmiotGrupa> przedmiotGrupa = new HashSet<PrzedmiotGrupa>();
 	
 	@Size(min = 1, max = 10)
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "pytanie_egzamin",
 			joinColumns = @JoinColumn(name = "egzamin_id"),
@@ -154,9 +156,17 @@ public class Egzamin{
 
 	@Override
 	public String toString() {
-		return "Egzamin [tytul=" + tytul + ", iloscPunktow=" + iloscPunktow + ", dostepnyCzas=" + dostepnyCzas
-				+ ", dostepnyOd=" + dostepnyOd + ", dostepnyDo=" + dostepnyDo + ", przedmiotGrupa=" + przedmiotGrupa
-				+ ", pytania=" + pytania + "]";
+		List<PytanieEgzaminacyjne> pytanie = new ArrayList<>();
+		pytanie.addAll(pytania);
+		return tytul + " z przedmiotu " + pytanie.get(0).getPrzedmiot();
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 	
 	

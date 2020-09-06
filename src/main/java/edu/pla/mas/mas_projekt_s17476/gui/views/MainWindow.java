@@ -17,6 +17,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import javax.swing.JSeparator;
 import javax.swing.border.SoftBevelBorder;
+
+import edu.pla.mas.mas_projekt_s17476.model.Egzamin;
 import edu.pla.mas.mas_projekt_s17476.model.Ocena;
 import edu.pla.mas.mas_projekt_s17476.model.Osoba;
 import javax.swing.border.BevelBorder;
@@ -45,10 +47,11 @@ public class MainWindow extends JFrame {
 	//cards layout
 	CardLayout cl;
 	JPanel cardsPanel = new JPanel();
-	//public final JComboBox<Egzamin> comboBox_1;
+	JComboBox<Egzamin> egzaminy = new JComboBox<>();
 	JButton showGradesButton = new JButton("Pokaż moje oceny");
 	JList<Ocena> gradesList = new JList<Ocena>(new DefaultListModel<Ocena>());
 	JButton newTestButton = new JButton("Nowy test");
+	JComboBox egzaminyComboBox = new JComboBox();
 
 	/**
 	 * Create the frame.
@@ -115,29 +118,20 @@ public class MainWindow extends JFrame {
 		
 		JPanel uczen = new JPanel();
 		cardsPanel.add(uczen, "Uczen");
-		uczen.setLayout(new MigLayout("", "[grow][][][][][grow]", "[][][][][][][grow][grow]"));
+		uczen.setLayout(new MigLayout("", "[grow][][][][][grow]", "[grow][][][][][][grow][grow]"));
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		uczen.add(panel_3, "cell 0 0 1 3,grow");
+		panel_3.setLayout(new MigLayout("", "[77px,grow]", "[14px][][]"));
 		
 		JLabel lblNewLabel_3 = new JLabel("Dostępne testy:");
-		uczen.add(lblNewLabel_3, "cell 0 0");
-		JButton btnNewButton_8 = new JButton("Rozwiąż");
-//		btnNewButton_8.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				frame.setEnabled(false);
-//				EventQueue.invokeLater(new Runnable() {
-//					public void run() {
-//						try {
-//							new EgzaminView("Egzamin", db, (Egzamin)comboBox_1.getSelectedItem(), frame, user);
-//						
-//						} catch (Exception e) {
-//							e.printStackTrace();
-//						}
-//					}
-//				});
-//				
-//			}
-//		});
+		panel_3.add(lblNewLabel_3, "cell 0 0,alignx left,aligny top");
 		
-		uczen.add(btnNewButton_8, "cell 0 2");
+		
+		panel_3.add(egzaminyComboBox, "cell 0 1,growx");
+		JButton btnNewButton_8 = new JButton("Rozwiąż");
+		panel_3.add(btnNewButton_8, "cell 0 2,alignx right");
 		
 		JLabel lblNewLabel_4 = new JLabel("Moduł uczeń");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -268,6 +262,22 @@ public class MainWindow extends JFrame {
 
 	public JButton getNewTestButton() {
 		return newTestButton;
+	}
+
+	public JComboBox<Egzamin> getEgzaminy() {
+		return egzaminy;
+	}
+
+	public void setEgzaminy(JComboBox<Egzamin> egzaminy) {
+		this.egzaminy = egzaminy;
+	}
+
+	public JComboBox getEgzaminyComboBox() {
+		return egzaminyComboBox;
+	}
+
+	public void setEgzaminyComboBox(JComboBox egzaminyComboBox) {
+		this.egzaminyComboBox = egzaminyComboBox;
 	}
 	
 	

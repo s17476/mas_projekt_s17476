@@ -3,9 +3,14 @@ package edu.pla.mas.mas_projekt_s17476.gui.controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -15,12 +20,21 @@ import org.springframework.stereotype.Component;
 
 import edu.pla.mas.mas_projekt_s17476.gui.views.MainWindow;
 import edu.pla.mas.mas_projekt_s17476.gui.views.Selection;
+import edu.pla.mas.mas_projekt_s17476.model.Egzamin;
 import edu.pla.mas.mas_projekt_s17476.model.PrzedmiotGrupa;
 import edu.pla.mas.mas_projekt_s17476.model.PytanieEgzaminacyjne;
+import edu.pla.mas.mas_projekt_s17476.repository.EgzaminRepo;
+import edu.pla.mas.mas_projekt_s17476.repository.PrzedmiotGrupaRepo;
 import edu.pla.mas.mas_projekt_s17476.repository.PytanieEgzaminacyjneRepo;
 
 @Component
 public class SelectionController {
+	
+	@Autowired
+	private PrzedmiotGrupaRepo pgRepo;
+	
+	@Autowired
+	private EgzaminRepo eRepo;
 
 	@Autowired
 	private PytanieEgzaminacyjneRepo peRepo;
@@ -78,6 +92,30 @@ public class SelectionController {
 
 
 	private void addListeners() {
+		
+		view.getCreateExam().addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+		try {
+				Set<PytanieEgzaminacyjne> pe = new HashSet<>();
+				for(int i = 0; i < view.getList1Model().getSize(); i++) {
+					pe.add(view.getList1Model().get(i));
+				}
+				Egzamin egz = new Egzamin(view.getTxtPrzykad().getText(), 10, Integer.parseInt(view.getTextField_1().getText()), LocalDate.parse(view.getTextField_2().getText()), LocalDate.parse(view.getTextField_3().getText()), 
+						pgRepo.findByIdEagerly(przedmiotGrupa.getId()).get(), pe);
+				
+
+				pgRepo.save(przedmiotGrupa);
+				eRepo.save(egz);
+				view.dispatchEvent(new WindowEvent(view, WindowEvent.WINDOW_CLOSING));
+			}catch(Exception exc) {
+				exc.printStackTrace();
+				JOptionPane.showMessageDialog(view, "Sprawdź wprowadzone dane!");
+			}
+			}
+		});
+
+
+		
 		
 		// zamknięcie okna
 		view.addWindowListener(new java.awt.event.WindowAdapter() {

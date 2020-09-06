@@ -232,7 +232,10 @@ public class DataInitializer {
 					);
 			
 			pgRepo.saveAll(pg);
+			gRepo.saveAll(grupy);
 			
+			
+
 
 			/*
 			 * dodaję opiekunów dla uczniów

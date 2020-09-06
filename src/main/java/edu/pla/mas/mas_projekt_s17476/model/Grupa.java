@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,7 +38,7 @@ public class Grupa {
 	public Set<Uczen> listaUcznow = new HashSet<Uczen>();
 	
 	@Nullable
-	@OneToMany(mappedBy = "przedmiot")
+	@OneToMany(mappedBy = "grupa")
 	private Set<PrzedmiotGrupa> przedmiotGrupa = new HashSet<PrzedmiotGrupa>();
 	
 	public Grupa() {}
@@ -102,6 +103,18 @@ public class Grupa {
 	@Override
 	public String toString() {
 		return "Grupa [numerGrupy=" + numerGrupy + "]";
+	}
+
+
+
+	public long getId() {
+		return id;
+	}
+
+
+
+	public void setId(long id) {
+		this.id = id;
 	}
 	
 	
