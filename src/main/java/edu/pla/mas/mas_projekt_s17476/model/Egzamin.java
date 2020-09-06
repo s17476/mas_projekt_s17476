@@ -63,7 +63,7 @@ public class Egzamin{
 			)
 	private Set<PrzedmiotGrupa> przedmiotGrupa = new HashSet<PrzedmiotGrupa>();
 	
-	@Size(min = 1, max = 10)
+	//@Size(min = 1, max = 10)
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "pytanie_egzamin",

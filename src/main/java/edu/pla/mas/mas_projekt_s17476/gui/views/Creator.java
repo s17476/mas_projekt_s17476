@@ -1,9 +1,6 @@
 package edu.pla.mas.mas_projekt_s17476.gui.views;
 
 import java.awt.Font;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -12,10 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-
 import edu.pla.mas.mas_projekt_s17476.model.Grupa;
 import edu.pla.mas.mas_projekt_s17476.model.Przedmiot;
-import edu.pla.mas.mas_projekt_s17476.model.PrzedmiotGrupa;
 import net.miginfocom.swing.MigLayout;
 
 /**

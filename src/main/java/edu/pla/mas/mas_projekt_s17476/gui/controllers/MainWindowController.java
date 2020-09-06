@@ -1,6 +1,5 @@
 package edu.pla.mas.mas_projekt_s17476.gui.controllers;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -9,14 +8,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.SwingUtilities;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import edu.pla.mas.mas_projekt_s17476.gui.views.MainWindow;
 import edu.pla.mas.mas_projekt_s17476.model.Egzamin;
 import edu.pla.mas.mas_projekt_s17476.model.Grupa;
@@ -30,6 +26,11 @@ import edu.pla.mas.mas_projekt_s17476.repository.OsobaRepo;
 import edu.pla.mas.mas_projekt_s17476.repository.PrzedmiotGrupaRepo;
 import edu.pla.mas.mas_projekt_s17476.repository.UczenRepo;
 
+/**
+ * 
+ * @author Grzegorz Frączek
+ *
+ */
 
 @Component
 public class MainWindowController {

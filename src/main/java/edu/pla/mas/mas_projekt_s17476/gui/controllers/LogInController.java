@@ -2,20 +2,20 @@ package edu.pla.mas.mas_projekt_s17476.gui.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.util.Optional;
-
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import edu.pla.mas.mas_projekt_s17476.gui.views.LogIn;
 import edu.pla.mas.mas_projekt_s17476.model.Osoba;
 import edu.pla.mas.mas_projekt_s17476.repository.OsobaRepo;
 
-
+/**
+ * 
+ * @author Grzegorz Frączek
+ *
+ */
 
 @Component
 public class LogInController {

@@ -1,10 +1,6 @@
 package edu.pla.mas.mas_projekt_s17476.gui.views;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.util.List;
-
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,7 +12,6 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-
 import edu.pla.mas.mas_projekt_s17476.model.PytanieEgzaminacyjne;
 import net.miginfocom.swing.MigLayout;
 

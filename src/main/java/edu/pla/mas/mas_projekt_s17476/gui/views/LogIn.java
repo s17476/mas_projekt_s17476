@@ -10,6 +10,12 @@ import javax.swing.JTextField;
 
 import net.miginfocom.swing.MigLayout;
 
+/**
+ * 
+ * @author Grzegorz Frączek
+ *
+ */
+
 public class LogIn extends JFrame {
 	
 	private JTextField userField;

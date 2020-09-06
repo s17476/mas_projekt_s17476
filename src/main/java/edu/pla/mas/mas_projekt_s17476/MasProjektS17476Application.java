@@ -50,7 +50,7 @@ public class MasProjektS17476Application {
 		ConfigurableApplicationContext ctx = new SpringApplicationBuilder(MasProjektS17476Application.class)
 				.headless(false).run(args);
 		
-		ctx.getBean(DataInitializer.class).initData();
+		//ctx.getBean(DataInitializer.class).initData();
 		
 		SwingUtilities.invokeLater(() -> {
 			ctx.getBean(LogInController.class).showGui();

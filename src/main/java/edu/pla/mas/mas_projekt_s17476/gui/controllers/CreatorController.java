@@ -6,14 +6,10 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.SwingUtilities;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import edu.pla.mas.mas_projekt_s17476.gui.views.Creator;
 import edu.pla.mas.mas_projekt_s17476.gui.views.MainWindow;
 import edu.pla.mas.mas_projekt_s17476.model.Grupa;
@@ -23,7 +19,13 @@ import edu.pla.mas.mas_projekt_s17476.model.Przedmiot;
 import edu.pla.mas.mas_projekt_s17476.model.PrzedmiotGrupa;
 import edu.pla.mas.mas_projekt_s17476.repository.KadraDydaktycznaRepo;
 
+/**
+ * 
+ * @author Grzegorz Frączek
+ *
+ */
 @Component
+
 public class CreatorController {
 	
 	@Autowired
@@ -32,9 +34,9 @@ public class CreatorController {
 	@Autowired
 	private SelectionController selectionController;
 	
-	Creator view;
+	private Creator view;
 	
-	MainWindow mainWindow;
+	private MainWindow mainWindow;
 	
 	List<PrzedmiotGrupa> przedmiotyWGrupach;
 	
@@ -51,7 +53,7 @@ public class CreatorController {
 		    @Override
 		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
 		    	mainWindow.setEnabled(true);
-		    	view.setVisible(false);
+		    	view.dispose();
 		    }
 		});
 		
@@ -60,8 +62,8 @@ public class CreatorController {
 		view.getCancelButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				view.dispatchEvent(new WindowEvent(view, WindowEvent.WINDOW_CLOSING));
+				mainWindow.setEnabled(true);
+				view.dispose();
 			}
 		});
 		
@@ -87,14 +89,16 @@ public class CreatorController {
 		view.getDalejButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				view.dispatchEvent(new WindowEvent(view, WindowEvent.WINDOW_CLOSING));
+				
+				przedmiotyWGrupach.forEach(x -> {
+					if(x.getPrzedmiot().equals(view.getComboPrzedmiot().getSelectedItem()) &&
+							x.getGrupa().equals(view.getComboGrupa().getSelectedItem()))
+						przedmiotGrupa = x;
+				});
 				SwingUtilities.invokeLater(() -> {
 					
 
-					przedmiotyWGrupach.forEach(x -> {
-						if(x.getPrzedmiot().equals(view.getComboPrzedmiot().getSelectedItem()) &&
-								x.getGrupa().equals(view.getComboGrupa().getSelectedItem()))
-							przedmiotGrupa = x;
-					});
+					
 //					System.out.println(przedmiotGrupa);
 					selectionController.showGui(przedmiotGrupa, mainWindow);
 				
@@ -107,9 +111,9 @@ public class CreatorController {
 		this.mainWindow = mainWindow;
 		view.setVisible(true);
 		initListeners();
-		SwingUtilities.invokeLater(() ->{
+
 			initData(user);
-		}); 
+
 		
 	}
 

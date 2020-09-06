@@ -5,13 +5,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.time.LocalDate;
 import java.util.Map;
-
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import edu.pla.mas.mas_projekt_s17476.gui.views.EgzaminView;
 import edu.pla.mas.mas_projekt_s17476.gui.views.MainWindow;
 import edu.pla.mas.mas_projekt_s17476.model.Egzamin;
@@ -21,6 +18,12 @@ import edu.pla.mas.mas_projekt_s17476.model.PytanieEgzaminacyjne;
 import edu.pla.mas.mas_projekt_s17476.repository.EgzaminRepo;
 import edu.pla.mas.mas_projekt_s17476.repository.OcenaRepo;
 import edu.pla.mas.mas_projekt_s17476.repository.UczenRepo;
+
+/**
+ * 
+ * @author Grzegorz Frączek
+ *
+ */
 
 @Component
 public class EgzaminViewController {

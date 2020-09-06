@@ -1,25 +1,16 @@
 package edu.pla.mas.mas_projekt_s17476.gui.views;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
 import edu.pla.mas.mas_projekt_s17476.model.Przedmiot;
-import edu.pla.mas.mas_projekt_s17476.model.PytanieEgzaminacyjne;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -53,11 +44,13 @@ public class Pytanie extends JFrame {
 	JRadioButton rdbtnNewRadioButton_2 = new JRadioButton();
 	JRadioButton rdbtnNewRadioButton_4 = new JRadioButton();
 	JRadioButton rdbtnNewRadioButton_6 = new JRadioButton();
+	
+	
 	public Pytanie(String name) {
 		super(name);
 
 
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setPreferredSize(new Dimension(500, 200));
 		setResizable(false);
 		setBounds(100, 100, 450, 300);
@@ -136,7 +129,7 @@ public class Pytanie extends JFrame {
 		contentPane.add(textField_4, "cell 1 6,growx");
 		textField_4.setColumns(10);
 		
-		JRadioButton rdbtnNewRadioButton_6 = new JRadioButton();
+		
 		contentPane.add(rdbtnNewRadioButton_6, "cell 2 6");
 		rdbtnNewRadioButton_6.setSelected(true);
 		
@@ -315,6 +308,9 @@ public class Pytanie extends JFrame {
 	public void setRdbtnNewRadioButton_6(JRadioButton rdbtnNewRadioButton_6) {
 		this.rdbtnNewRadioButton_6 = rdbtnNewRadioButton_6;
 	}
+
+
+
 	
 	
 }

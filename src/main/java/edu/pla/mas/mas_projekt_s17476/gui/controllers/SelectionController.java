@@ -4,20 +4,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import edu.pla.mas.mas_projekt_s17476.gui.views.MainWindow;
 import edu.pla.mas.mas_projekt_s17476.gui.views.Selection;
 import edu.pla.mas.mas_projekt_s17476.model.Egzamin;
@@ -26,6 +22,12 @@ import edu.pla.mas.mas_projekt_s17476.model.PytanieEgzaminacyjne;
 import edu.pla.mas.mas_projekt_s17476.repository.EgzaminRepo;
 import edu.pla.mas.mas_projekt_s17476.repository.PrzedmiotGrupaRepo;
 import edu.pla.mas.mas_projekt_s17476.repository.PytanieEgzaminacyjneRepo;
+
+/**
+ * 
+ * @author Grzegorz Frączek
+ *
+ */
 
 @Component
 public class SelectionController {
@@ -51,6 +53,7 @@ public class SelectionController {
 	
 	public SelectionController() {
 		view = new Selection("Wybór pytań");
+		addListeners();
 	}
 
 
@@ -60,7 +63,7 @@ public class SelectionController {
 		this.mainWindow = mainWindow;
 		this.mainWindow.setEnabled(false);
 		view.setVisible(true);
-		addListeners();
+		
 	
 		initData();
 		
@@ -74,14 +77,15 @@ public class SelectionController {
 		lista.removeAllElements();
 		DefaultListModel<PytanieEgzaminacyjne> lista1 = view.getList1Model();
 		lista1.removeAllElements();
-		System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxx" + peRepo.findAllEagerly());
+		//System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxx" + peRepo.findAllEagerly());
 		
 		peRepo.findAllEagerly()
 			.forEach(x -> {
 //				System.out.println("jeden " + x.getPrzedmiot().getId());
 //				System.out.println("drugi " + przedmiotGrupa.getPrzedmiot().getId());
 				if(x.getPrzedmiot().getId() == przedmiotGrupa.getPrzedmiot().getId()) {
-					lista.addElement(x);
+					if(!lista.contains(x))
+						lista.addElement(x);
 //					System.out.println("dodano");
 				}
 			});
@@ -92,7 +96,7 @@ public class SelectionController {
 
 
 	private void addListeners() {
-		
+		// utwórz nowy egzamin
 		view.getCreateExam().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 		try {
@@ -103,9 +107,11 @@ public class SelectionController {
 				Egzamin egz = new Egzamin(view.getTxtPrzykad().getText(), 10, Integer.parseInt(view.getTextField_1().getText()), LocalDate.parse(view.getTextField_2().getText()), LocalDate.parse(view.getTextField_3().getText()), 
 						pgRepo.findByIdEagerly(przedmiotGrupa.getId()).get(), pe);
 				
-
+				view.getList1Model().removeAllElements();
+				view.getListModel().removeAllElements();
 				pgRepo.save(przedmiotGrupa);
 				eRepo.save(egz);
+				JOptionPane.showMessageDialog(view, "Egzamin zapisany!");
 				view.dispatchEvent(new WindowEvent(view, WindowEvent.WINDOW_CLOSING));
 			}catch(Exception exc) {
 				exc.printStackTrace();
@@ -122,13 +128,15 @@ public class SelectionController {
 		    @Override
 		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
 		    	mainWindow.setEnabled(true);
+		    	view.dispose();
 		    }
 		});
 		
 		// przycisk anuluj
 		view.getAnulujButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				view.dispatchEvent(new WindowEvent(view, WindowEvent.WINDOW_CLOSING));
+				mainWindow.setEnabled(true);
+				view.dispose();
 			}
 		});
 		
@@ -180,6 +188,7 @@ public class SelectionController {
 			}
 		});
 		
+		//przycisk nowe pytanie
 		view.getNewQuestion().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			SwingUtilities.invokeLater(() ->{
