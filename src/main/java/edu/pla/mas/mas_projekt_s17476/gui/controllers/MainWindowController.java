@@ -35,6 +35,9 @@ import edu.pla.mas.mas_projekt_s17476.repository.UczenRepo;
 public class MainWindowController {
 	
 	@Autowired
+	private EgzaminViewController evController;
+	
+	@Autowired
 	private PrzedmiotGrupaRepo pgRepo;
 	
 	@Autowired
@@ -116,6 +119,18 @@ public class MainWindowController {
 			}
 		});
 		
+		// przycisk rozpoczynający test
+		view.getTestButton().addActionListener(e ->{
+			try {
+				Egzamin egz = (Egzamin) view.getEgzaminyComboBox().getModel().getSelectedItem();
+					if(egz != null)
+					SwingUtilities.invokeLater(() ->{
+						System.out.println("zaczynamy egzamin");
+						evController.showGui(egz, view, user);
+					});
+			}catch(Exception exc){}
+		});
+		
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -138,31 +153,35 @@ public class MainWindowController {
 		
 		
 		//czy jest uczniem
-		if(user.getUczen() != null)
+		if(user.getUczen() != null) {
 			list.add(user.getUczen());
+			Grupa grupa = user.getUczen().getGrupa();
+			
+			Optional<Grupa> pg = gRepo.findByIdAndFetchPrzedmiotGrupa(grupa.getId());
+			
+			if (pg.isPresent()) {
+				Set<PrzedmiotGrupa> pgg = pg.get().getPrzedmiotGrupa();
+				Set<PrzedmiotGrupa> peEager = new HashSet<>();
+				System.out.println("gdggdgddggddggdgd" + pgg);
+				pgg.forEach(x -> peEager.add(pgRepo.findByIdEagerly(x.getId()).get()));
+				List<Set<Egzamin>> egz = new ArrayList<>();
+				peEager.forEach(x -> egz.add(x.getEgzaminy()));
+				List<Egzamin> egzaminy = new ArrayList<Egzamin>();
+				egz.forEach(x -> x.forEach(y -> egzaminy.add(eRepo.findByIdEagerly(y.getId()).get())));
+				
+				DefaultComboBoxModel<Egzamin> comboModel = (DefaultComboBoxModel<Egzamin>) view.getEgzaminyComboBox().getModel();
+				comboModel.removeAllElements();
+				comboModel.addAll(egzaminy);
+	
+			System.out.println("Egzaminy" +egzaminy);
+				view.getTestButton().setEnabled(true);
+				
+			}
+		}
 		
 		
 		// wypełnienie combo box danymi o egzaminach - moduł uczeń
 		view.setRolesComboBox(list);
-		Grupa grupa = user.getUczen().getGrupa();
-		
-		Optional<Grupa> pg = gRepo.findByIdAndFetchPrzedmiotGrupa(grupa.getId());
-		
-		if (pg.isPresent()) {
-			Set<PrzedmiotGrupa> pgg = pg.get().getPrzedmiotGrupa();
-			Set<PrzedmiotGrupa> peEager = new HashSet<>();
-			System.out.println("gdggdgddggddggdgd" + pgg);
-			pgg.forEach(x -> peEager.add(pgRepo.findByIdEagerly(x.getId()).get()));
-			List<Set<Egzamin>> egz = new ArrayList<>();
-			peEager.forEach(x -> egz.add(x.getEgzaminy()));
-			List<Egzamin> egzaminy = new ArrayList<Egzamin>();
-			egz.forEach(x -> x.forEach(y -> egzaminy.add(eRepo.findByIdEagerly(y.getId()).get())));
-			
-			DefaultComboBoxModel<Egzamin> comboModel = (DefaultComboBoxModel<Egzamin>) view.getEgzaminyComboBox().getModel();
-			comboModel.removeAllElements();
-			comboModel.addAll(egzaminy);
 
-		System.out.println("Egzaminy" +egzaminy);
-		}
 	}
 }

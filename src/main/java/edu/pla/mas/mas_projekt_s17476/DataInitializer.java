@@ -266,12 +266,12 @@ public class DataInitializer {
 					"Zaznacz poprawne stwierdzenia:"};
 			List<List<String>> dobre = Arrays.asList(
 					List.of("Język programowania", "Wyspa na Pacyfiku", "Gatunek kawy"),
-					List.of("Tak"),
+					List.of("Tak", "Zdecydowanie tak"),
 					List.of("Jednym ze sposobów uzyskiwania trwałości ekstensji jest jej zapis do pliku")
 					);
 			List<List<String>> zle = Arrays.asList(
 					List.of("Protokół sieciowy"),
-					List.of("Nie"),
+					List.of("Nie", "Być może"),
 					List.of("Aplikacje biznesowe nie potrzebują trwałości ekstensji", 
 							"Problem trwałości ekstensji, spowodowany powiązaniami, jest spowodowany słabą wydajnością platformy Java",
 							"W celu poprawy wydajności, każdą ekstensję należy serializować do oddzielnego pliku")

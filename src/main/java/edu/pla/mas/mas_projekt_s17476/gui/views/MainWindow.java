@@ -52,13 +52,15 @@ public class MainWindow extends JFrame {
 	JList<Ocena> gradesList = new JList<Ocena>(new DefaultListModel<Ocena>());
 	JButton newTestButton = new JButton("Nowy test");
 	JComboBox egzaminyComboBox = new JComboBox();
+	
+	JButton testButton = new JButton("Rozwiąż");
 
 	/**
 	 * Create the frame.
 	 */
 	public MainWindow(String tytul) {
 		super(tytul);
-		
+		testButton.setEnabled(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 958, 400);
 		
@@ -130,8 +132,8 @@ public class MainWindow extends JFrame {
 		
 		
 		panel_3.add(egzaminyComboBox, "cell 0 1,growx");
-		JButton btnNewButton_8 = new JButton("Rozwiąż");
-		panel_3.add(btnNewButton_8, "cell 0 2,alignx right");
+		
+		panel_3.add(testButton, "cell 0 2,alignx right");
 		
 		JLabel lblNewLabel_4 = new JLabel("Moduł uczeń");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -278,6 +280,14 @@ public class MainWindow extends JFrame {
 
 	public void setEgzaminyComboBox(JComboBox egzaminyComboBox) {
 		this.egzaminyComboBox = egzaminyComboBox;
+	}
+
+	public JButton getTestButton() {
+		return testButton;
+	}
+
+	public void setTestButton(JButton testButton) {
+		this.testButton = testButton;
 	}
 	
 	

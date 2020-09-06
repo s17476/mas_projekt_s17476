@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -16,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.swing.JCheckBox;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -169,6 +171,34 @@ public class Egzamin{
 		this.id = id;
 	}
 	
+	public List<PytanieEgzaminacyjne> getPytaniaEgzaminacyjne(){
+		List<PytanieEgzaminacyjne> pytanie = new ArrayList<>();
+		pytanie.addAll(pytania);
+		return pytanie;
+	}
 	
+	public int check(Map<PytanieEgzaminacyjne, Map<String, JCheckBox>> test) {
+		int punkty = 0;
+		
+		for(int i = 0; i < getPytaniaEgzaminacyjne().size(); i++) {
+			boolean isOk = true;;
+			Map<String, JCheckBox> map = test.get(getPytaniaEgzaminacyjne().get(i));
+			Set<String> set = map.keySet();
+			List<String> list = new ArrayList<>(); 
+		    for (String x : set) 
+		      list.add(x);
+				//String[] pytania = (String[]) map.keySet().toArray();
+				for(int j = 0; j < list.size(); j++) {
+					if(map.get(list.get(j)).isSelected() && getPytaniaEgzaminacyjne().get(i).getZleOdpowiedzi().contains(list.get(j)))
+						isOk = false;
+					if(!map.get(list.get(j)).isSelected() && getPytaniaEgzaminacyjne().get(i).getDobreOdpowiedzi().contains(list.get(j)))
+						isOk = false;
+				}
+			if(isOk) punkty++;
+			
+		}
+	
+	return punkty;
+}
 	
 }
