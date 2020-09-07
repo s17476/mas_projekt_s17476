@@ -166,15 +166,15 @@ public class SelectionController {
 					String odpowiedzi = "<html><pre>";
 					for (int i = 1; i <= zle.size(); i++) {
 						if(zle.get(i-1).length() > 60)
-							odpowiedzi += i + ". <font color=red>" + zle.get(i-1).substring(0, 60) + "<br>" + zle.get(i-1).substring(60, zle.get(i-1).length()) + "</font><br>";
+							odpowiedzi += i + ". <font color=red>" + zle.get(i-1).substring(0, 60) + "<br>   " + zle.get(i-1).substring(60, zle.get(i-1).length()) + "</font><br>";
 						else
 							odpowiedzi += i + ". <font color=red>" + zle.get(i-1) + "</font><br>";
 					}
 					for (int i = 1; i <= dobre.size(); i++) {
 						if(dobre.get(i-1).length() > 60)
-							odpowiedzi += i+zle.size() + ".  <font color=green>" + dobre.get(i-1).substring(0, 60) + "<br>" +  dobre.get(i-1).substring(60, dobre.get(i-1).length()) + "</font><br>";
+							odpowiedzi += i+zle.size() + ". <font color=green>" + dobre.get(i-1).substring(0, 60) + "<br>   " +  dobre.get(i-1).substring(60, dobre.get(i-1).length()) + "</font><br>";
 						else
-							odpowiedzi += i+zle.size() + ".  <font color=green>" + dobre.get(i-1) + "</font><br>";
+							odpowiedzi += i+zle.size() + ". <font color=green>" + dobre.get(i-1) + "</font><br>";
 					}
 					odpowiedzi+="</pre></html>";
 					view.getAnswerLabel().setText(odpowiedzi);

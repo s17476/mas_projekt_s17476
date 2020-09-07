@@ -87,6 +87,7 @@ public class Selection extends JFrame {
 		contentPane.add(lblNewLabel_3, "cell 0 3,alignx left,aligny top");
 
 		label.setHorizontalAlignment(SwingConstants.LEFT);
+		answerLabel.setToolTipText("Poprawne odpowiedzi mają kolor zielony, niepoprawne czerwony.");
 		
 		answerLabel.setHorizontalAlignment(SwingConstants.LEFT);
 

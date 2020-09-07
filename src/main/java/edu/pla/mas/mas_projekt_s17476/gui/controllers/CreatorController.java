@@ -111,10 +111,8 @@ public class CreatorController {
 		this.mainWindow = mainWindow;
 		view.setVisible(true);
 		initListeners();
-
-			initData(user);
-
-		
+		//inicjalizacja danych w combo box przedmiot
+		initData(user);
 	}
 
 	private void initData(Osoba user) {
